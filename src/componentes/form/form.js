@@ -69,7 +69,7 @@ const Formulario = ({appendToParentPortal = true}) => {
                             <FormLabel mt={4} fontSize={25} >Adicione a tarefa</FormLabel>
                             <Input placeholder='Digite a tarefa' type='text' value={value} onChange={handleChange} />
                         </FormControl>
-                        <Button colorScheme='blue' mt={2} onClick={() => addTask()}>
+                        <Button colorScheme='blue' title='Adicionar tarefa' mt={2} onClick={() => addTask()}>
                             <AddIcon  color={'white'} boxSize={6} />
                         </Button>
                     </GridItem>

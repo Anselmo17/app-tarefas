@@ -53,10 +53,10 @@ const TableTasks = ({ appendToParentPortal = true, list, removeTask, editTask })
                                 <Td>{item.created}</Td>
                                 <Td>{item.status ? 'Pendente' : 'Concluído'}</Td>
                                 <Td>
-                                    <Button colorScheme='white'>
+                                    <Button colorScheme='white' title='Editar tarefa'>
                                         <EditIcon color={'blue'} boxSize={6} />
                                     </Button>
-                                    <Button colorScheme='white' marginLeft={2} onClick={()=> editData(item)}>
+                                    <Button colorScheme='white' title='Remover tarefa' marginLeft={2} onClick={()=> editData(item)}>
                                         <DeleteIcon color={'tomato'} boxSize={6} onClick={() => removeData(item.id)} />
                                     </Button>
                                 </Td>
