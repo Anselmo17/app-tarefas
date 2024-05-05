@@ -9,13 +9,26 @@ import {
     Td,
     Tbody,
     Text,
-    Divider
+    Divider,
+    TableCaption,
+    Button
 } from '@chakra-ui/react';
 
-import { AddIcon } from '@chakra-ui/icons';
+import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 
 
-const TableTasks = ({ list }) => {
+const TableTasks = ({ appendToParentPortal = true, list, removeTask, editTask }) => {
+
+
+    const removeData = (id) => {
+        removeTask(id);
+    };
+
+    const editData = (task) => {
+        editTask();
+    }
+
+
     return (
         <Container maxW='1200px' padding={10}>
 
@@ -40,21 +53,20 @@ const TableTasks = ({ list }) => {
                                 <Td>{item.created}</Td>
                                 <Td>{item.status ? 'Pendente' : 'Concluído'}</Td>
                                 <Td>
-                                    <AddIcon />
+                                    <Button colorScheme='white'>
+                                        <EditIcon color={'blue'} boxSize={6} />
+                                    </Button>
+                                    <Button colorScheme='white' marginLeft={2} onClick={()=> editData(item)}>
+                                        <DeleteIcon color={'tomato'} boxSize={6} onClick={() => removeData(item.id)} />
+                                    </Button>
                                 </Td>
                             </Tr>
                         ))}
-
-                        {
-                            !list || list.length === 0 ?
-                                <Tr align='center' mt={2} textAlign="center" fontSize='25px'>
-                                    <Text>
-                                        Nenhum task adicionada
-                                    </Text>
-                                </Tr>
-                                : ''
-                        }
                     </Tbody>
+                    {
+                        list.length === 0 ?
+                            <TableCaption fontSize={25} color={'tomato'}>Nenhum item encontrado</TableCaption> : ''
+                    }
                 </Table>
             </TableContainer>
         </Container>

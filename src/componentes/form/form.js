@@ -8,10 +8,14 @@ import {
     Container,
     Button
 } from '@chakra-ui/react';
+
+import { AddIcon } from '@chakra-ui/icons';
+
+
 import TableTasks from '../table/table'
 
 
-const Formulario = () => {
+const Formulario = ({appendToParentPortal = true}) => {
 
     const [tasks, setTasks] = useState([]);
     const [value, setValue] = useState('');
@@ -36,6 +40,26 @@ const Formulario = () => {
         setTasks([...tasks, sendItem]);
     }
 
+
+
+
+   function removeTask(id){
+    const tasksFiltered = tasks.filter(item => item.id !== id);
+    setTasks(tasksFiltered);
+   }
+
+
+   function editTask(task){
+    const tasksFiltered = tasks.filter(item => item.id !== task.id);
+
+    const currentValor = {
+      ...task
+    }
+
+    setTasks(...tasksFiltered, currentValor);
+    
+   }
+
     return (
         <Fragment>
             <Container maxW='1200px' padding={10} >
@@ -46,13 +70,13 @@ const Formulario = () => {
                             <Input placeholder='Digite a tarefa' type='text' value={value} onChange={handleChange} />
                         </FormControl>
                         <Button colorScheme='blue' mt={2} onClick={() => addTask()}>
-                            Adicionar
+                            <AddIcon  color={'white'} boxSize={6} />
                         </Button>
                     </GridItem>
                 </Grid>
             </Container>
 
-            <TableTasks list={tasks} />
+            <TableTasks list={tasks} removeTask={removeTask} editTask={editTask}/>
         </Fragment>
     )
 }
